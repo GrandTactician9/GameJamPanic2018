@@ -7,16 +7,14 @@ public class Shooting : MonoBehaviour {
     public GameObject bullet;
     public float bulletSpeed;
     float timer;
+  
+
 
     void shoot()
     {
-        if (gameObject.GetComponent<Player>().itemCount == 0) { 
         GameObject shot = (GameObject)Instantiate(bullet, transform.position, transform.rotation);
-        shot.GetComponent<Rigidbody>().velocity = shot.transform.forward * bulletSpeed;
+        shot.GetComponent<Rigidbody>().velocity = Vector3.left * bulletSpeed;
         Destroy(shot, 2.0f);
-    }
-       
-
     }
 
 	// Use this for initialization
@@ -31,6 +29,7 @@ public class Shooting : MonoBehaviour {
             shoot();
             timer = 0;
         }
-        
-	}
+    
+
+    }
 }

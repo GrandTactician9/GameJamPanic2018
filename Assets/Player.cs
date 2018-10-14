@@ -16,10 +16,13 @@ public class Player : MonoBehaviour {
     public int health = 5;
     public List <Sprite> healthPictures;
     public Image healthPicture;
+    
+    // backgrounds, random item spawner and count
 
     public int Health {
         get { return health; }
         set {
+            Debug.Log(healthPictures.Count);
             healthPicture.sprite = healthPictures[health];
             health = value;
         }
@@ -49,11 +52,13 @@ public class Player : MonoBehaviour {
         if (Input.GetKey(KeyCode.RightArrow))
         {
             rb.AddForce(new Vector3(x, 0, 0));
+            
         }
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             rb.AddForce(new Vector3(-x, 0, 0));
+            
         }
 
         if (Input.GetKey(KeyCode.UpArrow))
@@ -71,29 +76,29 @@ public class Player : MonoBehaviour {
         // Use this for initialization
         void Start () {
         rb = GetComponent<Rigidbody>();
-        
+        //getHurt();
     }
 	
 	// Update is called once per frame
 	void Update () {
         movement();
 
-        if (itemCount == 1)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            time += Time.deltaTime;
-            x = 250;
-            y = 250;
-            if (time == 2.0)
+            if (itemCount >= 1)
             {
-                itemCount = 0;
-                x = 100;
-                y = 100;
+                time += Time.deltaTime;
+                itemCount--;
+                x = 250;
+                y = 250;
+                if (time >= 2.0)
+                {
+                    x = 150;
+                    y = 150;
+                }
             }
+           
         }
-
-
-        // 5 second speed powerup and 5 health
-
 
 
         /* if (itemCount == 1)                   // weapon types
